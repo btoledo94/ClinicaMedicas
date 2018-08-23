@@ -1,6 +1,7 @@
 package edu.miumg.gt.clinicamedicas;
 
 import edu.miumg.gt.clinicamedicas.vistas.Login;
+import edu.miumg.gt.clinicamedicas.vistas.Registrar;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
@@ -24,5 +25,6 @@ public class Application {
     public Login login() {
         return new Login();
     }
-
-}
+    
+    
+ }

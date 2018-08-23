@@ -1,10 +1,15 @@
 package edu.miumg.gt.clinicamedicas.vistas;
 
+import edu.miumg.gt.clinicamedicas.entities.Especialista;
 import edu.miumg.gt.clinicamedicas.entities.Usuario;
+import edu.miumg.gt.clinicamedicas.repo.EspecialistaRepo;
 import edu.miumg.gt.clinicamedicas.repo.SessionRepo;
 import edu.miumg.gt.clinicamedicas.repo.UsuarioRepo;
 import edu.miumg.gt.clinicamedicas.util.EncryptMd5;
 import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +25,9 @@ public class Login extends javax.swing.JFrame {
     
     @Autowired()
     SessionRepo sessionRepo;
+    
+    @Autowired()
+    EspecialistaRepo especialistaRepo;
     
     public Login() {
         initComponents();
@@ -40,7 +48,7 @@ public class Login extends javax.swing.JFrame {
         String password = new String(txtPassword.getPassword());
 
         Usuario usuario = usuarioRepo.findByNombre(txtUsuario.getText().trim());
-        
+       
         
         if (usuario == null) {
             JOptionPane.showMessageDialog(this, "El usuario no existe", "Login", JOptionPane.DEFAULT_OPTION);
@@ -54,6 +62,7 @@ public class Login extends javax.swing.JFrame {
         
         Menu_ menu = new Menu_();
         menu.setLocationRelativeTo(null);
+        menu.setExtendedState(JFrame.MAXIMIZED_BOTH);
         menu.setVisible(true);
         
         //JOptionPane.showMessageDialog(this, "Bienvenido Sr. " + usuario.getNombre()+usuario.getId() , "Login", JOptionPane.DEFAULT_OPTION);
@@ -61,6 +70,15 @@ public class Login extends javax.swing.JFrame {
         
 
         
+    }
+    
+    private void registrar() throws Exception{
+
+       Registrar registrar = new Registrar();
+        registrar.setLocationRelativeTo(null);
+        registrar.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        registrar.setVisible(true);
+    
     }
 
     @SuppressWarnings("unchecked")
@@ -73,6 +91,7 @@ public class Login extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        bregistrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(".:UMG:. Login");
@@ -101,12 +120,25 @@ public class Login extends javax.swing.JFrame {
                 btnIngresarMouseClicked(evt);
             }
         });
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
 
         btnSalir.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
+            }
+        });
+
+        bregistrar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        bregistrar.setText("Registrar");
+        bregistrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btregistrar(evt);
             }
         });
 
@@ -127,9 +159,11 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnIngresar)
-                        .addGap(90, 90, 90)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bregistrar)
+                        .addGap(6, 6, 6)
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +179,9 @@ public class Login extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bregistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
 
@@ -166,8 +202,21 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPasswordKeyPressed
 
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btregistrar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btregistrar
+        try {
+            registrar();
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btregistrar
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bregistrar;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
