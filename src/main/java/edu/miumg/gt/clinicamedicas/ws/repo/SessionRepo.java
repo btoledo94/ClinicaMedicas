@@ -1,4 +1,4 @@
-package edu.miumg.gt.clinicamedicas.repo;
+package edu.miumg.gt.clinicamedicas.ws.repo;
 
 import edu.miumg.gt.clinicamedicas.entities.Session;
 import org.springframework.data.jpa.repository.JpaRepository;

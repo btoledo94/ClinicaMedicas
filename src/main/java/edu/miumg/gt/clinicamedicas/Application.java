@@ -26,5 +26,8 @@ public class Application {
         return new Login();
     }
     
-    
+    @Bean()
+    public Registrar registrar() {
+        return new Registrar();
+    }
  }

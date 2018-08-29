@@ -27,22 +27,22 @@ public class Usuario implements java.io.Serializable{
     
     private String password;
     
-     @Temporal(TemporalType.TIMESTAMP)
+     @Temporal(TemporalType.DATE)
     private Date fechaNacimineto;
      
      private String apellido;
     
      private Integer edad;
      
-     private Boolean sexo;
+     private Integer sexo;
      
      @ManyToOne
      private Especialista especialista;
-
+    
     public Usuario() {
     }
 
-    public Usuario(String usuario, String nombre, String password, Date fechaNacimineto, String apellido, Integer edad, boolean sexo, Especialista especialista) {
+    public Usuario(String usuario, String nombre, String password, Date fechaNacimineto, String apellido, Integer edad, Integer sexo, Especialista especialista) {
         this.usuario = usuario;
         this.nombre = nombre;
         this.password = password;
@@ -109,11 +109,11 @@ public class Usuario implements java.io.Serializable{
         this.edad = edad;
     }
 
-    public boolean isSexo() {
+    public Integer getSexo() {
         return sexo;
     }
 
-    public void setSexo(boolean sexo) {
+    public void setSexo(Integer sexo) {
         this.sexo = sexo;
     }
 
@@ -124,5 +124,11 @@ public class Usuario implements java.io.Serializable{
     public void setEspecialista(Especialista especialista) {
         this.especialista = especialista;
     }
-      
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "usuario=" + usuario + ", nombre=" + nombre + ", password=" + password + ", fechaNacimineto=" + fechaNacimineto + ", apellido=" + apellido + ", edad=" + edad + ", sexo=" + sexo + ", especialista=" + especialista + '}';
+    }
+    
+         
 }

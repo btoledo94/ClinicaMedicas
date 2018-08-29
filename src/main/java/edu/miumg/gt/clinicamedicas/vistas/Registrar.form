@@ -227,7 +227,9 @@
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="sexo"/>
             </Property>
+            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="M"/>
+            <Property name="label" type="java.lang.String" value="M"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Registrar_jRadioButton1"/>
@@ -239,6 +241,7 @@
               <ComponentRef name="sexo"/>
             </Property>
             <Property name="text" type="java.lang.String" value="F"/>
+            <Property name="label" type="java.lang.String" value="F"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
@@ -295,6 +298,10 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cargardatosCombox"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JComboxespecialistaActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

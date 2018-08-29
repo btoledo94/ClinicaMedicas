@@ -1,15 +1,11 @@
 package edu.miumg.gt.clinicamedicas.vistas;
 
-import edu.miumg.gt.clinicamedicas.entities.Especialista;
+
 import edu.miumg.gt.clinicamedicas.entities.Usuario;
-import edu.miumg.gt.clinicamedicas.repo.EspecialistaRepo;
-import edu.miumg.gt.clinicamedicas.repo.SessionRepo;
-import edu.miumg.gt.clinicamedicas.repo.UsuarioRepo;
+import edu.miumg.gt.clinicamedicas.ws.repo.SessionRepo;
+import edu.miumg.gt.clinicamedicas.ws.repo.UsuarioRepo;
 import edu.miumg.gt.clinicamedicas.util.EncryptMd5;
 import java.awt.event.KeyEvent;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author wilver
  */
+
 public class Login extends javax.swing.JFrame {
 
     @Autowired()
@@ -27,7 +24,7 @@ public class Login extends javax.swing.JFrame {
     SessionRepo sessionRepo;
     
     @Autowired()
-    EspecialistaRepo especialistaRepo;
+    Registrar registrar;
     
     public Login() {
         initComponents();
@@ -60,7 +57,7 @@ public class Login extends javax.swing.JFrame {
             return;
         }
         
-        Menu_ menu = new Menu_();
+        Menu menu = new Menu();
         menu.setLocationRelativeTo(null);
         menu.setExtendedState(JFrame.MAXIMIZED_BOTH);
         menu.setVisible(true);
@@ -72,9 +69,9 @@ public class Login extends javax.swing.JFrame {
         
     }
     
-    private void registrar() throws Exception{
+    private void registrar(){
 
-       Registrar registrar = new Registrar();
+        
         registrar.setLocationRelativeTo(null);
         registrar.setExtendedState(JFrame.MAXIMIZED_BOTH);
         registrar.setVisible(true);
@@ -207,11 +204,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btregistrar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btregistrar
-        try {
-            registrar();
-        } catch (Exception ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+              registrar();
+        
     }//GEN-LAST:event_btregistrar
 
 

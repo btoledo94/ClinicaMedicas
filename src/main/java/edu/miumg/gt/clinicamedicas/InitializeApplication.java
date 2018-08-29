@@ -13,11 +13,15 @@ public class InitializeApplication implements ApplicationRunner {
     @Autowired()
     private Login login;
     
+        
     @Override
     public void run(ApplicationArguments aa) throws Exception {
         
         login.setLocationRelativeTo(null);
         login.setVisible(true);
+        
+    //    registrar.setLocationRelativeTo(null);
+    //    registrar.setVisible(true);
               
     }
     

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.miumg.gt.clinicamedicas.repo;
+package edu.miumg.gt.clinicamedicas.ws.repo;
 
-import edu.miumg.gt.clinicamedicas.entities.Usuario;
+import edu.miumg.gt.clinicamedicas.entities.Especialista;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author BYRON TOLEDO
  */
 @Repository()
-public interface UsuarioRepo extends JpaRepository<Usuario,Integer>{
-
-    Usuario findByNombre(String nombre);
+public interface EspecialistaRepo extends JpaRepository<Especialista,Integer>{
+    
+      
 }

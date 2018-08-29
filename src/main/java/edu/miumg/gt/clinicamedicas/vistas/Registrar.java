@@ -6,18 +6,24 @@
 package edu.miumg.gt.clinicamedicas.vistas;
 
 import edu.miumg.gt.clinicamedicas.entities.Especialista;
-import edu.miumg.gt.clinicamedicas.repo.EspecialistaRepo;
-import edu.miumg.gt.clinicamedicas.repo.UsuarioRepo;
+import edu.miumg.gt.clinicamedicas.entities.Usuario;
+import edu.miumg.gt.clinicamedicas.util.EncryptMd5;
+import edu.miumg.gt.clinicamedicas.ws.inte.EspecialistaInt;
+import edu.miumg.gt.clinicamedicas.ws.inte.UsuarioInt;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
+
 
 
 /**
  *
  * @author BYRON TOLEDO
  */
-
 public class Registrar extends javax.swing.JFrame {
 
    
@@ -25,36 +31,108 @@ public class Registrar extends javax.swing.JFrame {
     /**
      * Creates new form Registrar
      */
-    
-    @Autowired()
-    UsuarioRepo usuarioRepo;
-    
-    @Autowired()
-    EspecialistaRepo especialistaRepo;
-
-   
-    
-    
-    public Registrar() throws Exception {
-        initComponents();
+    List<Especialista> especialidad;
+    DefaultComboBoxModel Combox1;
         
-       // generarEspecialista();
-         
-       
+    @Autowired()
+    EspecialistaInt especialistaInt;
+    
+    @Autowired()
+    UsuarioInt usuarioInt;
+
+    @Autowired()
+    Login login;
+
+    public Registrar(){
+        initComponents();
+                                    
     }
     
     private void RegistrarDatos(){
-             
-    
-    }
-    
-    private void generarEspecialista() throws Exception{
-       
-        Especialista esp = especialistaRepo.findOne(1);
-              
         
+        if("".equals(Jnombretxt.getText())){
+         JOptionPane.showMessageDialog(this, "El Campo Nombre Vacio", "Registrar", JOptionPane.DEFAULT_OPTION);
+            return;
+        }
+        
+        if("".equals(Japellidotxt.getText())){
+        JOptionPane.showMessageDialog(this, "El Campo Apellido Vacio", "Registrar", JOptionPane.DEFAULT_OPTION);
+            return;
+        }
+        
+        if("".equals(Jedadtxt.getText())){
+        JOptionPane.showMessageDialog(this, "El Campo Edad Vacio", "Registrar", JOptionPane.DEFAULT_OPTION);
+            return;
+        }
+             
+        if("".equals(Jusuariotxt.getText())){
+        JOptionPane.showMessageDialog(this, "El Campo Apellido Vacio", "Registrar", JOptionPane.DEFAULT_OPTION);
+            return;
+        }
+        
+        if("".equals(Jpasswordtxt.getText())){
+        JOptionPane.showMessageDialog(this, "El Campo Apellido Vacio", "Registrar", JOptionPane.DEFAULT_OPTION);
+            return;
+        }
+        
+        if("".equals(JDatenacimiento.getDate().toString())){
+        JOptionPane.showMessageDialog(this, "El Campo Apellido Vacio", "Registrar", JOptionPane.DEFAULT_OPTION);
+            return;
+        }
+        
+        Usuario usuario = new Usuario();
+        usuario.setNombre(Jnombretxt.getText().trim());
+        usuario.setApellido(Japellidotxt.getText().trim());
+        usuario.setEdad(Integer.valueOf(Jedadtxt.getText().trim()));
+        
+        if(JRadioM.isSelected()==true){
+        usuario.setSexo(1);
+        }else{
+        usuario.setSexo(0);
+        }
+        
+        usuario.setFechaNacimineto(JDatenacimiento.getDate());
+        usuario.setUsuario(Jusuariotxt.getText().trim());
+        
+        String password = new String(Jpasswordtxt.getPassword());
+        
+        usuario.setPassword(EncryptMd5.get_md5(password));
+        
+        try{
+        usuarioInt.save(usuario,especialidad.get(JComboxespecialista.getSelectedIndex()).getId());
+        }catch(Exception ex){
+        System.err.println(ex.getMessage());
+        } finally{
+        JOptionPane.showMessageDialog(null,"Ingresado Exitosamente");
+        login.setLocationRelativeTo(null);
+        login.setVisible(true);
+        this.setVisible(false);
+        }              
     }
+    
+    private DefaultComboBoxModel generarEspecialista(){
+        
+        Combox1 = new DefaultComboBoxModel();
+        
+        try {
+            especialidad = especialistaInt.findAllEspecialista();
 
+            for (int i = 0; i < especialidad.size(); i++) {
+
+                Combox1.addElement(especialidad.get(i).getTipoEspecialidad());
+
+            }
+        } catch (Exception ex) {
+            
+            System.err.println(ex);
+
+        }
+        
+        return Combox1;
+
+    }
+        
+               
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -113,10 +191,13 @@ public class Registrar extends javax.swing.JFrame {
         jLabel5.setText("SEXO:");
 
         sexo.add(JRadioM);
+        JRadioM.setSelected(true);
         JRadioM.setText("M");
+        JRadioM.setLabel("M");
 
         sexo.add(JRadioF);
         JRadioF.setText("F");
+        JRadioF.setLabel("F");
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel6.setText("FECHA NACIMIENTO:");
@@ -134,6 +215,16 @@ public class Registrar extends javax.swing.JFrame {
         Jpasswordtxt.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         JComboxespecialista.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        JComboxespecialista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cargardatosCombox(evt);
+            }
+        });
+        JComboxespecialista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JComboxespecialistaActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel9.setText("ESPECIALISTA EN:");
@@ -251,12 +342,31 @@ public class Registrar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JbuttonGuardarDatos(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JbuttonGuardarDatos
-        try {
-            generarEspecialista();
-        } catch (Exception ex) {
-            Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
-        }
+         RegistrarDatos();
     }//GEN-LAST:event_JbuttonGuardarDatos
+
+    private void cargardatosCombox(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargardatosCombox
+        // cargar los datos del combox
+       
+       if(especialidad!=null){
+       JComboxespecialista.removeAllItems();
+       especialidad.removeAll(especialidad);
+       Combox1.removeAllElements();
+       generarEspecialista().removeAllElements();
+       }
+                      
+        JComboxespecialista.setModel(generarEspecialista());        
+    }//GEN-LAST:event_cargardatosCombox
+
+    private void JComboxespecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JComboxespecialistaActionPerformed
+//         TODO add your handling code here:
+//        try{            
+//       JOptionPane.showMessageDialog(null,"Cantidad de espacio: "+JRadioM.isSelected());     
+//        }catch(Exception ex){
+//       System.err.println(ex.getMessage());
+//        }
+       
+    }//GEN-LAST:event_JComboxespecialistaActionPerformed
 
     /**
      * @param args the command line arguments

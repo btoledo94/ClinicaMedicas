@@ -5,6 +5,7 @@
     <artifactId>ClinicaMedicas</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    
     <organization>
         <name>${project.groupId}</name>
     </organization>
