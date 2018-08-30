@@ -66,17 +66,17 @@ public class Registrar extends javax.swing.JFrame {
         }
              
         if("".equals(Jusuariotxt.getText())){
-        JOptionPane.showMessageDialog(this, "El Campo Apellido Vacio", "Registrar", JOptionPane.DEFAULT_OPTION);
+        JOptionPane.showMessageDialog(this, "El Campo Usuario Vacio", "Registrar", JOptionPane.DEFAULT_OPTION);
             return;
         }
         
         if("".equals(Jpasswordtxt.getText())){
-        JOptionPane.showMessageDialog(this, "El Campo Apellido Vacio", "Registrar", JOptionPane.DEFAULT_OPTION);
+        JOptionPane.showMessageDialog(this, "El Campo Password Vacio", "Registrar", JOptionPane.DEFAULT_OPTION);
             return;
         }
         
-        if("".equals(JDatenacimiento.getDate().toString())){
-        JOptionPane.showMessageDialog(this, "El Campo Apellido Vacio", "Registrar", JOptionPane.DEFAULT_OPTION);
+        if(JDatenacimiento.getDate()==null){
+        JOptionPane.showMessageDialog(this, "El Campo Fecha Vacio", "Registrar", JOptionPane.DEFAULT_OPTION);
             return;
         }
         
@@ -361,7 +361,7 @@ public class Registrar extends javax.swing.JFrame {
     private void JComboxespecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JComboxespecialistaActionPerformed
 //         TODO add your handling code here:
 //        try{            
-//       JOptionPane.showMessageDialog(null,"Cantidad de espacio: "+JRadioM.isSelected());     
+//       JOptionPane.showMessageDialog(null,"Cantidad de espacio: "+JComboxespecialista.getItemAt(JComboxespecialista.getSelectedIndex()));     
 //        }catch(Exception ex){
 //       System.err.println(ex.getMessage());
 //        }

@@ -5,6 +5,10 @@
  */
 package edu.miumg.gt.clinicamedicas.vistas;
 
+import edu.miumg.gt.clinicamedicas.ws.inte.SessionInt;
+import javax.swing.JFrame;
+import org.springframework.beans.factory.annotation.Autowired;
+
 /**
  *
  * @author BYRON TOLEDO
@@ -14,8 +18,15 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu_
      */
+    
+    @Autowired()
+     Persona persona;
+    
+    @Autowired()
+    SessionInt sessionInt;
+    
     public Menu() {
-        initComponents();
+     initComponents();
         
     }
 
@@ -24,7 +35,7 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        jButton1 = new javax.swing.JButton();
+        JCrearPersona = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -41,10 +52,16 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        JcerrarSesion = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\BYRON TOLEDO\\Documents\\NetBeansProjects\\ClinicaMedicas\\src\\main\\java\\IMAGENES\\user.png")); // NOI18N
+        JCrearPersona.setIcon(new javax.swing.ImageIcon("C:\\Users\\BYRON TOLEDO\\Documents\\NetBeansProjects\\ClinicaMedicas\\src\\main\\java\\IMAGENES\\user.png")); // NOI18N
+        JCrearPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCrearPersonaActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\BYRON TOLEDO\\Documents\\NetBeansProjects\\ClinicaMedicas\\src\\main\\java\\IMAGENES\\resume.png")); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -64,7 +81,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(JCrearPersona, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -82,7 +99,7 @@ public class Menu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton4))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(JCrearPersona)
                         .addGap(106, 106, 106)
                         .addComponent(jButton2)))
                 .addGap(99, 99, 99)
@@ -97,7 +114,7 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(45, 45, 45)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(JCrearPersona, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(72, 72, 72)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
@@ -144,6 +161,19 @@ public class Menu extends javax.swing.JFrame {
 
         MenuBar.add(jMenu4);
 
+        JcerrarSesion.setText("Cerrar Session");
+        JcerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JcerrarSesionMouseClicked(evt);
+            }
+        });
+        JcerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JcerrarSesionActionPerformed(evt);
+            }
+        });
+        MenuBar.add(JcerrarSesion);
+
         setJMenuBar(MenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -170,11 +200,28 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void JCrearPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCrearPersonaActionPerformed
+        persona.setLocationRelativeTo(null);
+        persona.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        persona.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_JCrearPersonaActionPerformed
+
+    private void JcerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JcerrarSesionActionPerformed
+    
+    }//GEN-LAST:event_JcerrarSesionActionPerformed
+
+    private void JcerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JcerrarSesionMouseClicked
+         sessionInt.delete();
+         System.exit(0);
+    }//GEN-LAST:event_JcerrarSesionMouseClicked
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JCrearPersona;
+    private javax.swing.JMenu JcerrarSesion;
     private javax.swing.JMenuBar MenuBar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

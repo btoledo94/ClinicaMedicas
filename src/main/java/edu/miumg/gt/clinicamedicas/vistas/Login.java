@@ -1,10 +1,12 @@
 package edu.miumg.gt.clinicamedicas.vistas;
 
 
+import edu.miumg.gt.clinicamedicas.entities.Session;
 import edu.miumg.gt.clinicamedicas.entities.Usuario;
 import edu.miumg.gt.clinicamedicas.ws.repo.SessionRepo;
 import edu.miumg.gt.clinicamedicas.ws.repo.UsuarioRepo;
 import edu.miumg.gt.clinicamedicas.util.EncryptMd5;
+import edu.miumg.gt.clinicamedicas.ws.inte.SessionInt;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -21,7 +23,10 @@ public class Login extends javax.swing.JFrame {
     UsuarioRepo usuarioRepo;
     
     @Autowired()
-    SessionRepo sessionRepo;
+    Menu menu;
+    
+    @Autowired()
+    SessionInt sessionInt;
     
     @Autowired()
     Registrar registrar;
@@ -45,8 +50,9 @@ public class Login extends javax.swing.JFrame {
         String password = new String(txtPassword.getPassword());
 
         Usuario usuario = usuarioRepo.findByNombre(txtUsuario.getText().trim());
-       
-        
+        Session session = new Session();
+        session.setToken(password);
+               
         if (usuario == null) {
             JOptionPane.showMessageDialog(this, "El usuario no existe", "Login", JOptionPane.DEFAULT_OPTION);
             return;
@@ -57,7 +63,8 @@ public class Login extends javax.swing.JFrame {
             return;
         }
         
-        Menu menu = new Menu();
+        sessionInt.save(session,usuario);
+        
         menu.setLocationRelativeTo(null);
         menu.setExtendedState(JFrame.MAXIMIZED_BOTH);
         menu.setVisible(true);
@@ -70,8 +77,6 @@ public class Login extends javax.swing.JFrame {
     }
     
     private void registrar(){
-
-        
         registrar.setLocationRelativeTo(null);
         registrar.setExtendedState(JFrame.MAXIMIZED_BOTH);
         registrar.setVisible(true);

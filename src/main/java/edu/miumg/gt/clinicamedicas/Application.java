@@ -1,6 +1,8 @@
 package edu.miumg.gt.clinicamedicas;
 
 import edu.miumg.gt.clinicamedicas.vistas.Login;
+import edu.miumg.gt.clinicamedicas.vistas.Menu;
+import edu.miumg.gt.clinicamedicas.vistas.Persona;
 import edu.miumg.gt.clinicamedicas.vistas.Registrar;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -29,5 +31,15 @@ public class Application {
     @Bean()
     public Registrar registrar() {
         return new Registrar();
+    }
+    
+    @Bean()
+    public Persona persona() {
+         return new Persona();
+    }
+    
+    @Bean()
+    public  Menu menu() {
+      return new Menu();
     }
  }

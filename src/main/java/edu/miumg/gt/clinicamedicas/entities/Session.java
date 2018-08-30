@@ -23,11 +23,11 @@ public class Session implements java.io.Serializable{
     
     private String token;
     
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaInicio;
-    
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaFin;
+//    @Temporal(TemporalType.TIMESTAMP)
+//    private Date fechaInicio;
+//    
+//    @Temporal(TemporalType.TIMESTAMP)
+//    private Date fechaFin;
     
     @ManyToOne()
     @JoinColumn()
@@ -36,11 +36,11 @@ public class Session implements java.io.Serializable{
     public Session() {
     }
 
-    public Session(Integer id, String token, Date fechaInicio, Date fechaFin, Usuario usuario) {
+    public Session(Integer id, String token, Usuario usuario) {
         this.id = id;
         this.token = token;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+//        this.fechaInicio = fechaInicio;
+//        this.fechaFin = fechaFin;
         this.usuario = usuario;
     }
 
@@ -60,21 +60,21 @@ public class Session implements java.io.Serializable{
         this.token = token;
     }
 
-    public Date getFechaInicio() {
-        return fechaInicio;
-    }
-
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    public Date getFechaFin() {
-        return fechaFin;
-    }
-
-    public void setFechaFin(Date fechaFin) {
-        this.fechaFin = fechaFin;
-    }
+//    public Date getFechaInicio() {
+//        return fechaInicio;
+//    }
+//
+//    public void setFechaInicio(Date fechaInicio) {
+//        this.fechaInicio = fechaInicio;
+//    }
+//
+//    public Date getFechaFin() {
+//        return fechaFin;
+//    }
+//
+//    public void setFechaFin(Date fechaFin) {
+//        this.fechaFin = fechaFin;
+//    }
 
     public Usuario getUsuario() {
         return usuario;
